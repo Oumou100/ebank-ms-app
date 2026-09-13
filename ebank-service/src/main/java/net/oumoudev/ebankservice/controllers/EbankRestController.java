@@ -2,10 +2,7 @@ package net.oumoudev.ebankservice.controllers;
 
 import net.oumoudev.ebankservice.entities.BankAccount;
 import net.oumoudev.ebankservice.services.EBankService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class EbankRestController {
     }
 
     @GetMapping("/accounts/{id}")
-    public BankAccount getAllBankAccountsById(String id){
+    public BankAccount getAllBankAccountsById(@PathVariable String id){
         return eBankService.getAllBankAccountsById(id);
     }
 
