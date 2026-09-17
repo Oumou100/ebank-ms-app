@@ -16,7 +16,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    @McpTool
+    @McpTool(description = "List all registered bank customers")
     public List<Customer> getAllCustomers(){
         return customerRepository.findAll();
     }
