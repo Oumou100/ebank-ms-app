@@ -1,5 +1,11 @@
 <div class = "p-3">
-    @if (accounts$ | async; as accountList) {
+    @if (accounts$ | async; as state) {
+        @if(state.status === RequestStatus.ERROR){
+            <div class="text-danger">
+                {{state.errorMessage}}
+            </div>
+
+        } @else if (state.status === RequestStatus.SUCCESS) {
         <table class="table">
             <thead>
                 <tr>
@@ -11,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (acc of accountList; track acc.id) {
+                @for (acc of state.accounts; track acc.id) {
                     <tr>
                         <td>{{acc.id}} </td>
                         <td>{{acc.balance}} </td>
@@ -20,8 +26,8 @@
                         <td>{{acc.customerId}} </td>
                     </tr>
                 }
-
-
+            </tbody>
         </table>
-    }  
+        }
+    }
 </div>
