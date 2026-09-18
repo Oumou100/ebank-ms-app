@@ -3,8 +3,10 @@ package net.oumoudev.ebankbot.agents;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 @Service
 public class EbankAiAgent {
@@ -23,10 +25,25 @@ public class EbankAiAgent {
     }
 
     public String chat(String query, String conversationId){
+        String safeConversationId = normalizeConversationId(conversationId);
         return chatClient.prompt()
                 .user(query)
-                .advisors(advisor -> advisor.param(ChatMemory.CONVERSATION_ID, conversationId))
+                .advisors(advisor -> advisor.param(ChatMemory.CONVERSATION_ID, safeConversationId))
                 .call()
                 .content();
+    }
+
+    public Flux<String> chatStream(Prompt prompt, String conversationId){
+        String safeConversationId = normalizeConversationId(conversationId);
+        return chatClient.prompt(prompt)
+                .advisors(advisor -> advisor.param(ChatMemory.CONVERSATION_ID, safeConversationId))
+                .stream()
+                .content();
+    }
+
+    private String normalizeConversationId(String conversationId) {
+        return conversationId == null || conversationId.isBlank()
+                ? "default"
+                : conversationId;
     }
 }

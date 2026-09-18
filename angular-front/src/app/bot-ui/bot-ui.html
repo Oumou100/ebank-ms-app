@@ -3,7 +3,7 @@
     <div class="card-body">
         <input [(ngModel)]="query" type="text" class="form-control m-2" placeholder="Enter your message"
             style="display:inline; width: 80%;">
-        <button (click)="askAgent()" class="btn btn-primary" style="display:inline;">
+        <button (click)="askAgentStream()" class="btn btn-primary" style="display:inline;">
             <i class="bi bi-search"></i>
         </button>
         @if (loadingService.isLoading()) {
@@ -13,8 +13,10 @@
         }
     </div>
     <div class="card-body">
-        @if (response$ | async; as botResponse) {
-        <markdown [data]="botResponse"></markdown>
+        @if (response$ | async; as resp) {
+            @if (resp.type === 'Response') {
+            <markdown [data]="resp.body"></markdown>
+            }
         }
 
     </div>
