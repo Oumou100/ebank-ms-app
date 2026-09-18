@@ -1,3 +1,19 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowed-origins:
+                  - "*"
+                allowed-methods:
+                  - "*"
+                allowed-headers:
+                  - "*"
+
+
 #spring:
 #  cloud:
 #    gateway:

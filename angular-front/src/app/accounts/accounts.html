@@ -1,0 +1,27 @@
+<div class = "p-3">
+    @if (accounts$ | async; as accountList) {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Balance</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>CustomerdId</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (acc of accountList; track acc.id) {
+                    <tr>
+                        <td>{{acc.id}} </td>
+                        <td>{{acc.balance}} </td>
+                        <td>{{acc.createdAt}} </td>
+                        <td>{{acc.type}} </td>
+                        <td>{{acc.customerId}} </td>
+                    </tr>
+                }
+
+
+        </table>
+    }  
+</div>
