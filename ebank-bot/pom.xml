@@ -78,6 +78,12 @@
             <artifactId>spring-boot-starter-discord</artifactId>
             <version>5.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots-spring-boot-starter</artifactId>
+            <version>6.9.7.1</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

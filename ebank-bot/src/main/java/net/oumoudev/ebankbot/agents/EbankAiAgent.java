@@ -46,4 +46,9 @@ public class EbankAiAgent {
                 ? "default"
                 : conversationId;
     }
+
+    public String chatTelegram(String query, String conversationId){
+        return chat(query, conversationId);
+    }
+
 }

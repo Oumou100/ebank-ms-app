@@ -24,6 +24,13 @@ public class EbankChatbotController {
         return ebankAiAgent.chat(query, conversationId);
     }
 
+
+    @GetMapping(value = "/chattelegram", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String chatTelegram(
+            @RequestParam(name = "query", defaultValue = "Bonjour") String query,
+            @RequestParam(name = "conversationId", defaultValue = "default") String conversationId) {
+        return ebankAiAgent.chatTelegram(query, conversationId);
+    }
     @GetMapping(value = "/chatStream", produces = MediaType.TEXT_PLAIN_VALUE)
     public Flux<String> chatStream(
             @RequestParam(name = "query", defaultValue = "Bonjour") String query,
